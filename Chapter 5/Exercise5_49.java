@@ -13,6 +13,7 @@ public class Exercise5_49
 		Scanner input = new Scanner(System.in);
 		String userString = "nothing";
 		int tally = 0;
+		int tallyCon = 0;
 				
 		System.out.print("Please enter a string and this will count the vowels: ");
 		userString = input.nextLine();
@@ -31,9 +32,12 @@ public class Exercise5_49
 				tally++;
 			else if(upperCaseVersion.charAt(i) == 'U')
 				tally++;
+			else if(upperCaseVersion.charAt(i) != ' ')
+				tallyCon++;	
+			
 		}
 		
-		System.out.println(userString + " has " + tally + " vowels in it.");
+		System.out.println(userString + " has " + tally + " vowels in it and " + tallyCon + " consonants in it.");
 		
 	}//close main method
 
