@@ -15,7 +15,7 @@ public class Exercise5_49
 		int tally = 0;
 		int tallyCon = 0;
 				
-		System.out.print("Please enter a string and this will count the vowels: ");
+		System.out.print("Please enter a string and this will count the vowels and consonants: ");
 		userString = input.nextLine();
 		
 		String upperCaseVersion = userString.toUpperCase();
