@@ -58,7 +58,6 @@ public class ERPQuoteTool
 		int[] productPrice = {1000, 1500, 1600, 2100};//8Port, 8Port PRI cost respectively
 		
 		String[] serviceName = {"Telephone", "Fax", "Fire Alarm", "Security", "Elevator", "Internet", "EmergencyCallBox", "PRILine"};
-		int[] serviceLength = {12, 24, 36, 48, 60}; //This is in months
 
 		int[] userSelection = new int[8];
 		int userContract = 0;
@@ -141,11 +140,12 @@ public class ERPQuoteTool
 		System.out.println("Based on your needs of the following services:");
 		for(int i = 0; i < userSelection.length; i++)
 			if(userSelection[i] != 0)
-				System.out.print(serviceName[i] + " \n\n");
-			System.out.println("Your Custom quote prices come out to the following:");
-			System.out.println("Unit model needed:" + productName[unitType] + ": " + quote[0]);
-			System.out.println("Monthly Cost:		" + quote[1]);
-			System.out.println("Total Cost at end of contract:	" + quote[2]);
+				System.out.print(serviceName[userSelection[i] - 1] + ", ");
+			System.out.println("\n");
+			System.out.println("Your Custom quote prices come out to the following");
+			System.out.println("Unit model needed:" + productName[unitType] + "\nUnit Price: $" + quote[0]);
+			System.out.println("Monthly Cost: $" + quote[1]);
+			System.out.println("Total Cost at end of contract: $" + quote[2]);
 		
 	}//End of premiumCustomer method
 	
@@ -207,10 +207,159 @@ public class ERPQuoteTool
 	
  	public static void independantCustomer()
 	{
-		Scanner input = new Scanner(System.in);
-		String[] productName = new String[10];
-		double[] productPrice = new double[10];
+Scanner input = new Scanner(System.in);
+		
+		int[] quote = new int[3];
+		String[] productName =  {"4Port", "4Port PRI", "8Port","8Port PRI"};
+		int[] productPrice = {1500, 2000, 2100, 2600};//8Port, 8Port PRI cost respectively
+		
+		String[] serviceName = {"Telephone", "Fax", "Fire Alarm", "Security", "Elevator", "Internet", "EmergencyCallBox", "PRILine"};
+
+		int[] userSelection = new int[8];
+		int userContract = 0;
+		boolean validity = false;
+		int unitType = 0;
+		
+		System.out.println("Please select the services to be used up to 8 total");
+		System.out.println("__________________________________________________________________"
+				+ "_______________________________________________________________________");
+		System.out.println("Input the number next to the desired service followed by a space, "
+				+ "then press enter when all desired services (up to 8 total) are slected");
+		System.out.println("Example: 1 2 3 8 0 0 0 0");
+		System.out.println("__________________________________________________________________"
+				+ "_______________________________________________________________________");
+		System.out.println("0. No Service\n"
+						 + "1. Telephone Line\n"
+						 + "2. Fax Line\n"
+						 + "3. Fire Alarm\n"
+						 + "4. Security Alarm\n"
+						 + "5. Elevator Alarm\n"
+						 + "6. Internet Failover\n"
+						 + "7. Emergency Call Box\n"
+						 + "8. PRI Telephone Line\n");
+		
+		//A do while loop that will repeat until valid integer input is given from the user
+		do
+		{
+			validity = true;
+			System.out.print("Your input: ");
+			for(int i = 0; i < userSelection.length; i++)
+				userSelection[i] = input.nextInt();
+			
+			//for loop that checks validity of user's input
+			for(int j = 0; j < userSelection.length; j++)
+				if(userSelection[j] < 0 || userSelection[j] > 8)
+					validity = false;
+			
+			//Displays error message if invalid input was found
+			if(validity == false)
+				System.out.println("One or more of your inputs was invalid, please try again.");
+			
+		}while(validity == false);
+		
+		System.out.println("Please select how long this service contract will be");
+		System.out.println("_______________________________________________________________");
+		System.out.println("Input one of the numbers next to the projected contract length");
+		System.out.println("_______________________________________________________________");
+		System.out.println("1. 12 Months\n"
+					 	 + "2. 24 Months\n"
+						 + "3. 36 Months\n"
+						 + "4. 48 Months\n"
+						 + "5. 60 Months\n"
+						 + "6. Exit Program\n");
+		System.out.print("Your input: ");
+		
+		//a do while loop that contains a nested while loop to prevent any invalid input from being accepted and exiting the program early
+		do
+		{
+			while(!input.hasNextInt())
+			{
+				input.next();
+				System.out.print("Invalid input\nPlease enter a number between 1-5: ");
+			}
+			userContract = input.nextInt();
+			
+			if(userContract == 6)
+				System.exit(0);
+			
+			if(userContract > 5 || userContract < 1)
+				System.out.print("Invalid input\nPlease enter a number between 1-5: ");
+			
+		}while(userContract > 5 || userContract < 1);
+		
+		quote = calculateIndependantQuote(userSelection, userContract);
+		
+		for(int j = 0; j < productPrice.length; j++)
+			if(quote[0] == productPrice[j])
+				unitType = j;
+		
+		System.out.println("Based on your needs of the following services:");
+		for(int i = 0; i < userSelection.length; i++)
+			if(userSelection[i] != 0)
+				System.out.print(serviceName[userSelection[i] - 1] + ", ");
+			System.out.println("\n");
+			System.out.println("Your Custom quote prices come out to the following");
+			System.out.println("Unit model needed:" + productName[unitType] + "\nUnit Price: $" + quote[0]);
+			System.out.println("Monthly Cost: $" + quote[1]);
+			System.out.println("Total Cost at end of contract: $" + quote[2]);
+		
 		
 	}//end of independantCustomer method
+ 	
+ 	public static int[] calculateIndependantQuote(int[] services, int contract)
+	{
+		int[] result = new int[3];
+		int unitCost = 0;
+		int monthlyCost = 0;
+		int totalCost = 0;
+		int counter = 0;
+		int service = 0;
+		boolean priChecker = false;
+		int[][] productPrice = {	{1500, 2000},//4Port, 4Port PRI cost respectively
+									{2100, 2600}};//8Port, 8Port PRI cost respectively
+		int[] serviceLength = {12, 24, 36, 48, 60}; //This is in months
+		int[][] servicePrice = {	{40, 40, 40, 40, 40, 40, 40, 45},//12 month rate
+									{36, 36, 36, 36, 36, 36, 36, 41},//24 month rate
+									{32, 32, 32, 32, 32, 32, 32, 37},//36 month rate
+									{28, 28, 28, 28, 28, 28, 28, 33},//48 month rate
+									{22, 22, 22, 22, 22, 22, 22, 28}};//60 month rate
+		
+		//for loop to see how many services are requested and determine if a PRI unit is needed
+		for(int i = 0; i < services.length; i++)
+		{
+			if(services[i] > 0)
+				counter++;
+			if(services[i] == 8)
+				priChecker = true;
+		}
+		
+		//if else chain to determine individual unit cost based on how many services were chosen and if there was a PRI service requested
+		if(counter > 4 && priChecker == true)
+			unitCost = productPrice[1][1];
+		else if(counter > 4 && priChecker == false)
+			unitCost = productPrice[1][0];
+		else if(counter <= 4 && priChecker == true)
+			unitCost = productPrice[0][1];
+		else if(counter <= 4 && priChecker == false)
+			unitCost = productPrice[0][0];
+		
+		for(int j = 0; j < services.length; j++)
+		{
+			if(services[j] != 0)
+			{
+				service = services[j];
+				monthlyCost += servicePrice[contract-1][service-1];
+			}
+		}
+		
+		totalCost = (monthlyCost * serviceLength[contract-1]) + unitCost;
+		
+		result[0] = unitCost;
+		result[1] = monthlyCost;
+		result[2] = totalCost;
+		
+		
+		return result;
+	}//end of calculateIndependantQuote method
 	
 }//end of ERPQuoteTool class
