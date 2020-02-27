@@ -1,11 +1,21 @@
 /*-------------------------------------* 
 |Author:   	Cameron Hiatt 
-|Date:		 
+|Date:		February 27th, 2020
 *-------------------------------------*/
 
 package erpQuoteTool;
 import java.util.Scanner;
 
+/**
+ * <h1>JavaDoc Test</h1>
+ * <p>The ERPQuoteTool class is a mock up quote generator for the Epik company.
+ * The prices here are not actual prices and this is meant to be a type of what could be used as a tool to help
+ * generate quotes for potential customers on products and services they need. </p>
+ * 
+ * <p>Created: February 25th, 2020</p>
+ * @author Cameron Hiatt
+ *
+ */
 public class ERPQuoteTool 
 {
 	public static void main(String[] args)
@@ -18,7 +28,7 @@ public class ERPQuoteTool
 		
 		System.out.println("Please select one of the following that applies to your company (Key in the number beside your option and press enter)");
 		System.out.println("1. Premium Business Customer");
-		System.out.println("2. Independant Business Customer");
+		System.out.println("2. independent Business Customer");
 		System.out.println("3. Exit\n");
 		System.out.print("Answer: ");
 		
@@ -44,11 +54,17 @@ public class ERPQuoteTool
 		if(customerType == 1)
 			premiumCustomer();
 		else
-			independantCustomer();
+			independentCustomer();
 		
 	}//end of main method
 	
-	
+	/**
+	 * The premiumCustomer method prompts the user for information based on their answer given in the main method. 
+	 * The main difference in this method from future methods is that it calls a specific calculation method for a premium quote 
+	 * rather than an independent business quote.
+	 * 
+	 * <pre>Example: premiumCustomer();</pre>
+	 */
 	public static void premiumCustomer()
 	{
 		Scanner input = new Scanner(System.in);
@@ -149,6 +165,18 @@ public class ERPQuoteTool
 		
 	}//End of premiumCustomer method
 	
+	/**
+	 * The calculatePremiumQuote method does a calculation based on premium prices to decide what unit is needed to 
+	 * provide the services requested, that unit's cost, the price that each service will add up to monthly, and the total cost
+	 * at the end of the determined contract length that includes both unit price and the total of all payments made during the contract.
+	 * It returns an array containing this information.
+	 * 
+	 * <pre>Example: calculatePremiumQuote({1, 3, 5, 7, 0, 0, 0, 8}, 3) returns {2100, 115, 6240}</pre>
+	 *  
+	 * @param services (int array, these correspond with different services offered that the user chose earlier.)
+	 * @param contract (int, this is a number representing one of 5 possible contract lengths for the services required.)
+	 * @return result (int array, this is an array containing unit cost, monthly payment amount, and total cost of contract.)
+	 */
 	public static int[] calculatePremiumQuote(int[] services, int contract)
 	{
 		int[] result = new int[3];
@@ -205,7 +233,14 @@ public class ERPQuoteTool
 		return result;
 	}//end of calculatePremiumQuote method
 	
- 	public static void independantCustomer()
+	/**
+	 * The independentCustomer method prompts the user for information based on their answer given in the main method. 
+	 * The main difference in this method from future methods is that it calls a specific calculation method for an independent quote 
+	 * rather than an premium business quote.
+	 * 
+	 * <pre>Example: independentCustomer();</pre>
+	 */
+ 	public static void independentCustomer()
 	{
  		Scanner input = new Scanner(System.in);
 		
@@ -287,7 +322,7 @@ public class ERPQuoteTool
 			
 		}while(userContract > 5 || userContract < 1);
 		
-		quote = calculateIndependantQuote(userSelection, userContract);
+		quote = calculateIndependentQuote(userSelection, userContract);
 		
 		for(int j = 0; j < productPrice.length; j++)
 			if(quote[0] == productPrice[j])
@@ -304,9 +339,21 @@ public class ERPQuoteTool
 			System.out.println("Total Cost at end of contract: $" + quote[2]);
 		
 		
-	}//end of independantCustomer method
+	}//end of independentCustomer method
  	
- 	public static int[] calculateIndependantQuote(int[] services, int contract)
+ 	/**
+	 * The calculateIndependentQuote method does a calculation based on independent business prices to decide what unit is needed to 
+	 * provide the services requested, that unit's cost, the price that each service will add up to monthly, and the total cost
+	 * at the end of the determined contract length that includes both unit price and the total of all payments made during the contract.
+	 * It returns an array containing this information.
+	 * 
+	 * <pre>Example: calculateIndependentQuote({1, 3, 5, 7, 0, 0, 0, 8}, 3) returns {2600, 165, 8540}</pre>
+	 *  
+	 * @param services (int array, these correspond with different services offered that the user chose earlier.)
+	 * @param contract (int, this is a number representing one of 5 possible contract lengths for the services required.)
+	 * @return result (int array, this is an array containing unit cost, monthly payment amount, and total cost of contract.)
+	 */
+ 	public static int[] calculateIndependentQuote(int[] services, int contract)
 	{
 		int[] result = new int[3];
 		int unitCost = 0;
@@ -360,6 +407,6 @@ public class ERPQuoteTool
 		
 		
 		return result;
-	}//end of calculateIndependantQuote method
+	}//end of calculateindependentQuote method
 	
 }//end of ERPQuoteTool class
