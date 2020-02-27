@@ -28,7 +28,7 @@ public class ERPQuoteTool
 		
 		System.out.println("Please select one of the following that applies to your company (Key in the number beside your option and press enter)");
 		System.out.println("1. Premium Business Customer");
-		System.out.println("2. independent Business Customer");
+		System.out.println("2. Independent Business Customer");
 		System.out.println("3. Exit\n");
 		System.out.print("Answer: ");
 		
@@ -73,7 +73,7 @@ public class ERPQuoteTool
 		String[] productName =  {"4Port", "4Port PRI", "8Port","8Port PRI"};
 		int[] productPrice = {1000, 1500, 1600, 2100};//8Port, 8Port PRI cost respectively
 		
-		String[] serviceName = {"Telephone", "Fax", "Fire Alarm", "Security", "Elevator", "Internet", "EmergencyCallBox", "PRILine"};
+		String[] serviceName = {"Telephone Line", "Fax Line", "Fire Alarm", "Security Alarm", "Elevator Alarm", "Internet Failover", "Emergency Call Box", "PRI Telephone Line"};
 
 		int[] userSelection = new int[8];
 		int userContract = 0;
@@ -248,7 +248,7 @@ public class ERPQuoteTool
 		String[] productName =  {"4Port", "4Port PRI", "8Port","8Port PRI"};
 		int[] productPrice = {1500, 2000, 2100, 2600};//8Port, 8Port PRI cost respectively
 		
-		String[] serviceName = {"Telephone", "Fax", "Fire Alarm", "Security", "Elevator", "Internet", "EmergencyCallBox", "PRILine"};
+		String[] serviceName = {"Telephone Line", "Fax Line", "Fire Alarm", "Security Alarm", "Elevator Alarm", "Internet Failover", "Emergency Call Box", "PRI Telephone Line"};
 
 		int[] userSelection = new int[8];
 		int userContract = 0;
