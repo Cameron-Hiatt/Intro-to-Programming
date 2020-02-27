@@ -207,7 +207,7 @@ public class ERPQuoteTool
 	
  	public static void independantCustomer()
 	{
-Scanner input = new Scanner(System.in);
+ 		Scanner input = new Scanner(System.in);
 		
 		int[] quote = new int[3];
 		String[] productName =  {"4Port", "4Port PRI", "8Port","8Port PRI"};
