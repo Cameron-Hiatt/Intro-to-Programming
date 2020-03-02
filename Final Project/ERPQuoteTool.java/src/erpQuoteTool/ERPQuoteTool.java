@@ -84,7 +84,7 @@ public class ERPQuoteTool
 		System.out.println("__________________________________________________________________"
 				+ "_______________________________________________________________________");
 		System.out.println("Input the number next to the desired service followed by a space, "
-				+ "then press enter when all desired services (up to 8 total) are slected");
+				+ "then press enter when all desired services (up to 8 total) are selected");
 		System.out.println("Example: 1 2 3 8 0 0 0 0");
 		System.out.println("__________________________________________________________________"
 				+ "_______________________________________________________________________");
@@ -236,7 +236,7 @@ public class ERPQuoteTool
 	/**
 	 * The independentCustomer method prompts the user for information based on their answer given in the main method. 
 	 * The main difference in this method from future methods is that it calls a specific calculation method for an independent quote 
-	 * rather than an premium business quote.
+	 * rather than a premium business quote.
 	 * 
 	 * <pre>Example: independentCustomer();</pre>
 	 */
@@ -259,7 +259,7 @@ public class ERPQuoteTool
 		System.out.println("__________________________________________________________________"
 				+ "_______________________________________________________________________");
 		System.out.println("Input the number next to the desired service followed by a space, "
-				+ "then press enter when all desired services (up to 8 total) are slected");
+				+ "then press enter when all desired services (up to 8 total) are selected");
 		System.out.println("Example: 1 2 3 8 0 0 0 0");
 		System.out.println("__________________________________________________________________"
 				+ "_______________________________________________________________________");
@@ -407,6 +407,6 @@ public class ERPQuoteTool
 		
 		
 		return result;
-	}//end of calculateindependentQuote method
+	}//end of calculateIndependentQuote method
 	
 }//end of ERPQuoteTool class
